@@ -5,12 +5,41 @@ import numpy as np
 ionosphere = fetch_ucirepo(id=52) 
   
 # data (as pandas dataframes) 
-X = ionosphere.data.features 
+x = ionosphere.data.features 
 y = ionosphere.data.targets 
   
 # metadata 
 #print(ionosphere.metadata) 
   
 # variable information 
-#print(ionosphere.variables) 
+#print(ionosphere.variables)
+#print(ionosphere.data.features) 
+#print(ionosphere.data.targets)
+
+#for col in range(y.shape[0]):
+countB=0
+countG=0
+List=[]
+j=2
+i=0
+sizeOfY =y.shape[0]
+sizeOfX =x.shape[1]
+
+while i< (sizeOfY):
+    while j<(sizeOfX):
+        value= x.iat[i,j]
+        List.append(value)
+        
+        j+=1
+    
+    i+=1
+    j=0
+
+
+plt.figure()
+plt.boxplot(List,patch_artist=True)
+
+plt.grid()
+plt.show()
+
 
