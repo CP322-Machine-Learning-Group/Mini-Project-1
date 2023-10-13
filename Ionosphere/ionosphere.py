@@ -31,7 +31,6 @@ while i< (sizeOfY):
         List.append(value)
         
         j+=1
-    
     i+=1
     j=0
 
