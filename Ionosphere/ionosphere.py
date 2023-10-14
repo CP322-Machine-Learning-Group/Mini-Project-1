@@ -14,11 +14,9 @@ y = ionosphere.data.targets
 # variable information 
 #print(ionosphere.variables)
 #print(ionosphere.data.features) 
-#print(ionosphere.data.targets)
+print(ionosphere.data.targets)
 
 #for col in range(y.shape[0]):
-countB=0
-countG=0
 List=[]
 j=2
 i=0
