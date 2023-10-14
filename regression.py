@@ -17,25 +17,28 @@ class LogReg:
         self.bias = 0
 
     # Accuracy Fuction.
-    def evaluate_acc(self, x, y, threshold=0.5):
-        accuracy = self.predict(x, threshold)
+    def evaluate_acc(self, X, y, threshold=0.5):
+        accuracy = self.predict(X, threshold)
         return np.mean(accuracy == y)
 
 
     # Fit Function.
-    def fit(self, x, y):
-        m, n_features = x.shape
+    def fit(self, X, y):
+        m, n_features = X.shape
         self.initialize_parameters(n_features)
 
         for _ in range(self.num_epochs):
-            z = np.dot(x, self.theta) + self.bias
+            z = np.dot(X, self.theta) + self.bias
             h = self.sigmoid(z)
-            gradient = np.dot(x.T, (h - y)) / m
+            gradient = np.dot(X.T, (h - y)) / m
             self.theta -= self.learning_rate * gradient
             self.bias -= self.learning_rate * np.sum(h - y) / m
 
     # Predict and Test Function.
-    def predict(self, x, threshold=0.5):
-        z = np.dot(x, self.theta) + self.bias
+    def predict(self, X, threshold=0.5):
+        z = np.dot(X, self.theta) + self.bias
         h = self.sigmoid(z)
         return (h >= threshold).astype(int)
+
+    def gradient_decendt(self):
+        return
