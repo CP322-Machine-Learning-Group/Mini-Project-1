@@ -30,10 +30,11 @@ class LogReg:
             z = np.dot(X, self.theta) + self.y_inter
             h = self.sigmoid_function(z)
             loss = self.logistic_loss(h, y)
+            X=np.transpose(X) 
             gradient = np.dot(X.T, (h - y)) / m
-            self.theta -= self.learning_rat
-            X=np.transpose(X) * gradient
-            self.bias -= self.Xrning_rate * np.sum(h - y) / m
+            self.theta -= self.learning_rate* gradient
+            
+            self.bias -= self.learning_rate* np.sum(h - y) / m
 
     # Predict and Test Function.
     def predict(self, X, threshold=0.5):
