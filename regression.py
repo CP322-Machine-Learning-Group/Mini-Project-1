@@ -21,7 +21,6 @@ class LogReg:
         accuracy = self.predict(X, threshold)
         return np.mean(accuracy == y)
 
-
     # Fit Function.
     def fit(self, X, y):
         m, n_features = X.shape
@@ -30,6 +29,7 @@ class LogReg:
         for _ in range(self.num_epochs):
             z = np.dot(X, self.theta) + self.bias
             h = self.sigmoid(z)
+            loss = self.logistic_loss(h, y)
             gradient = np.dot(X.T, (h - y)) / m
             self.theta -= self.learning_rate * gradient
             self.bias -= self.learning_rate * np.sum(h - y) / m
@@ -39,6 +39,18 @@ class LogReg:
         z = np.dot(X, self.theta) + self.bias
         h = self.sigmoid(z)
         return (h >= threshold).astype(int)
+    
+    def mean_squared_error(self, X, y):
+        m = X.shape[0]
+        z = np.dot(X, self.theta) + self.bias
+        h = self.sigmoid_function(z)
+        mse = np.mean((h - y) ** 2)
+        return mse
+    
+    def logistic_loss(self, h, y):
+        m = len(y)
+        epsilon = 1e-15  # Small value to avoid division by zero in log
+        loss = - (1 / m) * (np.sum(y * np.log(h + epsilon) + (1 - y) * np.log(1 - h + epsilon)))
+        return loss
 
-    def gradient_decendt(self):
-        return
+        
