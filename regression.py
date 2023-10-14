@@ -6,8 +6,6 @@ class LogReg:
     def __init__(self, learning_rate=0.01, num_epochs=1000): # Learning Rate and Epochs can be changed.
         self.learning_rate = learning_rate
         self.num_epochs = num_epochs
-        self.theta = None
-        self.bias = 0.0
         
     # The sigmoid Function.
     def sigmoid_function(self, z):
@@ -16,7 +14,7 @@ class LogReg:
     # Parameters initialization.
     def initialize_parameters(self, n_features):
         self.theta = np.zeros(n_features)
-        self.bias = 0
+        self.y_inter = 0
 
     # Accuracy Fuction.
     def evaluate_acc(self, X, y, threshold=0.5):
@@ -27,19 +25,16 @@ class LogReg:
     def fit(self, X, y):
         m, n_features = X.shape
         self.initialize_parameters(n_features)
-        
-        # Ensure y is a 1D array
-        y = y.reshape(-1)
-        
+
         for _ in range(self.num_epochs):
-            z = np.dot(X, self.theta) + self.bias
+            z = np.dot(X, self.theta) + self.y_inter
             h = self.sigmoid_function(z)
             loss = self.logistic_loss(h, y)
+            X=np.transpose(X) 
             gradient = np.dot(X.T, (h - y)) / m
-            self.theta -= self.learning_rate * gradient
-
-            # Update bias
-            self.bias -= self.learning_rate * np.sum(h - y) / m
+            self.theta -= self.learning_rate* gradient
+            
+            self.bias -= self.learning_rate* np.sum(h - y) / m
 
     # Predict and Test Function.
     def predict(self, X, threshold=0.5):
