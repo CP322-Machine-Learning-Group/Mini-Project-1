@@ -17,8 +17,8 @@ Also known as "Census Income". This is a dataset where the goal is topredict wea
 https://archive.ics.uci.edu/dataset/2/adult
 ```
 
-### Car Evaluation Dataset
-Derived from simple hierarchical decision model, this database may be useful for testing constructive induction and structure discovery methods
+### Spambase Dataset
+Classifying Email as Spam or Non-Spam
 ```
-https://archive.ics.uci.edu/dataset/19/car+evaluation
+https://archive.ics.uci.edu/dataset/94/spambase
 ```
