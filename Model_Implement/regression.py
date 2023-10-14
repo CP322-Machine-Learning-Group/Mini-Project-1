@@ -14,7 +14,7 @@ class LogReg:
     # Parameters initialization.
     def initialize_parameters(self, n_features):
         self.theta = np.zeros(n_features)
-        self.bias = 0
+        self.y_inter = 0
 
     # Accuracy Fuction.
     def evaluate_acc(self, X, y, threshold=0.5):
@@ -27,12 +27,13 @@ class LogReg:
         self.initialize_parameters(n_features)
 
         for _ in range(self.num_epochs):
-            z = np.dot(X, self.theta) + self.bias
-            h = self.sigmoid(z)
+            z = np.dot(X, self.theta) + self.y_inter
+            h = self.sigmoid_function(z)
             loss = self.logistic_loss(h, y)
             gradient = np.dot(X.T, (h - y)) / m
-            self.theta -= self.learning_rate * gradient
-            self.bias -= self.learning_rate * np.sum(h - y) / m
+            self.theta -= self.learning_rat
+            X=np.transpose(X) * gradient
+            self.bias -= self.Xrning_rate * np.sum(h - y) / m
 
     # Predict and Test Function.
     def predict(self, X, threshold=0.5):
@@ -52,5 +53,6 @@ class LogReg:
         epsilon = 1e-15  # Small value to avoid division by zero in log
         loss = - (1 / m) * (np.sum(y * np.log(h + epsilon) + (1 - y) * np.log(1 - h + epsilon)))
         return loss
+
 
         
