@@ -22,19 +22,21 @@ j=2
 i=0
 sizeOfY =y.shape[0]
 sizeOfX =x.shape[1]
+y=np.array(y)
 
-while i< (sizeOfY):
-    while j<(sizeOfX):
-        value= x.iat[i,j]
-        List.append(value)
-        
-        j+=1
-    i+=1
-    j=0
+while i<len(y):
+    if y[i]=='g':
+        List.append('1')
+        i+=1
+    else:
+        List.append('0')
+        i+=1
+print(List)
+    
 
 
 plt.figure()
-plt.boxplot(List,patch_artist=True)
+plt.plot(List)
 
 plt.grid()
 plt.show()

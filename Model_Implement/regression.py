@@ -33,7 +33,6 @@ class LogReg:
             X=np.transpose(X) 
             gradient = np.dot(X.T, (h - y)) / m
             self.theta -= self.learning_rate* gradient
-            
             self.bias -= self.learning_rate* np.sum(h - y) / m
 
     # Predict and Test Function.
