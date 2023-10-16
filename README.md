@@ -22,3 +22,9 @@ Classifying Email as Spam or Non-Spam
 ```
 https://archive.ics.uci.edu/dataset/94/spambase
 ```
+
+### Iris
+A small classic dataset from Fisher, 1936. One of the earliest known datasets used for evaluating classification methods.
+'''
+https://archive.ics.uci.edu/dataset/53/iris
+'''
