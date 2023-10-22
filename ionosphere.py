@@ -47,18 +47,12 @@ losses = lr.fit(X, y)
 accuracy = lr.evaluate_acc(X, y)
 print('Accuracy: ', accuracy)
 
+knn = KNN(k=3)
+accuracy = KNN.k_fold_cross_validation(knn, X, y, k=5)
+print("5-Fold Cross-Validation Accuracy:", accuracy)
 
-model = LogReg(learning_rate=0.01, num_epochs=1000)
 
-# Perform k-fold cross-validation
-accuracy_scores = model.k_fold_cross_validation(X, y, 5)
 
-# Print the accuracy for each fold and the average accuracy
-for i, accuracy in enumerate(accuracy_scores):
-    print("Fold {}: Accuracy = {:.2f}%".format(i + 1, accuracy * 100))
-
-average_accuracy = np.mean(accuracy_scores)
-print("Average Accuracy: {:.2f}%".format(average_accuracy * 100))
 plt.figure()
 plt.plot(losses)
 
