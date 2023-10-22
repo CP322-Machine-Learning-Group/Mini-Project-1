@@ -64,6 +64,8 @@ class LogReg:
         loss = -(1 / m) * (np.sum(y * np.log(h + epsilon) + (1 - y) * np.log(1 - h + epsilon)))
         return loss
     
+import numpy as np
+
 class KNN:
     def __init__(self, k):
         self.k = k
@@ -88,16 +90,6 @@ class KNN:
         most_common = np.bincount(k_nearest_labels).argmax()
         return most_common
 
-    def knn(self, X_train, y_train, X_test, k=3):
-            predictions = []
-            for test_point in X_test:
-                distances = [np.linalg.norm(test_point - train_point) for train_point in X_train]
-                k_indices = np.argsort(distances)[:k]
-                k_nearest_labels = [y_train[i] for i in k_indices]
-                most_common = np.bincount(k_nearest_labels).argmax()
-                predictions.append(most_common)
-            return np.array(predictions)
-        
     def k_fold_cross_validation(self, X, y, k=5):
         fold_size = len(X) // k
         accuracy_scores = []
@@ -111,9 +103,13 @@ class KNN:
             X_test = X[start_idx:end_idx]
             y_test = y[start_idx:end_idx]
 
-            self.initialize_parameters(X_train.shape[1])
             self.fit(X_train, y_train)
-            accuracy = self.evaluate_acc(X_test, y_test)
+            accuracy = self.evaluate_accuracy(X_test, y_test)
             accuracy_scores.append(accuracy)
 
-        return accuracy_scores   
+        return accuracy_scores
+
+    def evaluate_accuracy(self, X, y):
+        predictions = self.predict(X)
+        return np.mean(predictions == y)
+

@@ -44,18 +44,18 @@ X = np.array(X) #(4601, 57)
 lr = LogReg(learning_rate=0.1, num_epochs=100)
 losses = lr.fit(X, y)
 
-accuracy = lr.evaluate_acc(X, y)
-print('Accuracy: ', accuracy)
+accuracy_LogReg = lr.evaluate_acc(X, y)
+print('log regression Accuracy: ', accuracy_LogReg)
 
-knn = KNN(k=3)
-accuracy = KNN.k_fold_cross_validation(knn, X, y, k=5)
-print("5-Fold Cross-Validation Accuracy:", accuracy)
+knn = KNN(k=4)
+accuracy_k_fold = KNN.k_fold_cross_validation(knn, X, y, k=5)
+print("5-Fold Cross-Validation Accuracy:", accuracy_k_fold)
 
 
 
 plt.figure()
-plt.plot(losses)
-
+#plt.plot(losses)
+plt.plot(accuracy_k_fold)
 plt.grid()
 plt.show()
 
