@@ -1,11 +1,13 @@
 from ucimlrepo import fetch_ucirepo 
 import matplotlib.pyplot as plt  
 import numpy as np
+from regression import LogReg
+
 # fetch dataset 
 ionosphere = fetch_ucirepo(id=52) 
   
 # data (as pandas dataframes) 
-x = ionosphere.data.features 
+X = ionosphere.data.features 
 y = ionosphere.data.targets 
   
 # metadata 
@@ -17,26 +19,33 @@ y = ionosphere.data.targets
 print(ionosphere.data.targets)
 
 #for col in range(y.shape[0]):
-List=[]
+
+
+Y=[]
 j=2
 i=0
 sizeOfY =y.shape[0]
-sizeOfX =x.shape[1]
+sizeOfX =X.shape[1]
 y=np.array(y)
-
 while i<len(y):
     if y[i]=='g':
-        List.append('1')
+        Y.append(1)
         i+=1
     else:
-        List.append('0')
+        Y.append(0)
         i+=1
-print(List)
+#print(List)
+
     
 
+y = np.array(Y) #(4601, 1)
+X = np.array(X) #(4601, 57)
+
+lr = LogReg(learning_rate=0.1, num_epochs=100)
+losses = lr.fit(X, y)
 
 plt.figure()
-plt.plot(List)
+plt.plot(losses)
 
 plt.grid()
 plt.show()
