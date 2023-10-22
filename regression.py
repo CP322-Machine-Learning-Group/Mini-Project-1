@@ -64,7 +64,7 @@ class LogReg:
         loss = -(1 / m) * (np.sum(y * np.log(h + epsilon) + (1 - y) * np.log(1 - h + epsilon)))
         return loss
     
-
+'''
 class KNN:
     def __init__(self, k):
         self.k = k
@@ -119,3 +119,74 @@ def k_fold_cross_validation(model, X, y, k):
 
     mean_accuracy = np.mean(accuracies)
     return mean_accuracy
+'''
+def knn(self, X_train, y_train, X_test, k=3):
+        predictions = []
+        for test_point in X_test:
+            distances = [np.linalg.norm(test_point - train_point) for train_point in X_train]
+            k_indices = np.argsort(distances)[:k]
+            k_nearest_labels = [y_train[i] for i in k_indices]
+            most_common = np.bincount(k_nearest_labels).argmax()
+            predictions.append(most_common)
+        return np.array(predictions)
+    
+def k_fold_cross_validation(self, X, y, k=5):
+    fold_size = len(X) // k
+    accuracy_scores = []
+
+    for i in range(k):
+        start_idx = i * fold_size
+        end_idx = (i + 1) * fold_size if i < k - 1 else len(X)
+
+        X_train = np.concatenate((X[:start_idx], X[end_idx:]), axis=0)
+        y_train = np.concatenate((y[:start_idx], y[end_idx:]), axis=0)
+        X_test = X[start_idx:end_idx]
+        y_test = y[start_idx:end_idx]
+
+        self.initialize_parameters(X_train.shape[1])
+        self.fit(X_train, y_train)
+        accuracy = self.evaluate_acc(X_test, y_test)
+        accuracy_scores.append(accuracy)
+
+    return accuracy_scores
+'''
+# Import necessary libraries
+import numpy as np
+
+
+# Define the number of folds (k)
+k = 5
+
+# Calculate the number of data points in each fold
+fold_size = len(X) // k
+
+# Initialize variables to store evaluation metrics (if needed)
+# For example:
+# accuracy_scores = []
+
+# Implement k-fold cross-validation
+for i in range(k):
+    # Define the indices for the current fold
+    start_idx = i * fold_size
+    end_idx = (i + 1) * fold_size if i < k - 1 else len(X)
+    
+    # Split the data into training and testing sets
+    features_train = np.concatenate((X[:start_idx], X[end_idx:]), axis=0)
+    labels_train = np.concatenate((y[:start_idx], y[end_idx:]), axis=0)
+    features_test = X[start_idx:end_idx]
+    labels_test = y[start_idx:end_idx]
+    
+    # Train your model using features_train and labels_train
+    
+    # Evaluate your model on the test set
+    # For example, calculate accuracy
+    # accuracy = your_evaluation_function(features_test, labels_test)
+    # accuracy_scores.append(accuracy)
+
+# Calculate the average accuracy (or other evaluation metric) from the list of evaluation scores if needed
+# avg_accuracy = np.mean(accuracy_scores)
+
+# Print or use the average accuracy as needed
+# print("Average Accuracy: {:.2f}".format(avg_accuracy))
+
+'''
