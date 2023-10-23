@@ -54,8 +54,6 @@ class LogReg:
         epsilon = 1e-15  # Small value to avoid division by zero in log
         loss = -(1 / m) * (np.sum(y * np.log(h + epsilon) + (1 - y) * np.log(1 - h + epsilon)))
         return loss
-    
-import numpy as np
 
 class KNN:
     def __init__(self, k):
