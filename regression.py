@@ -49,15 +49,6 @@ class LogReg:
         h = self.sigmoid_function(z)
         return (h >= threshold).astype(int)
 
-    '''
-    def mean_squared_error(self, X, y):
-        m = X.shape[0]
-        z = np.dot(X, self.theta) + self.bias
-        h = self.sigmoid_function(z)
-        mse = np.mean((h - y) ** 2)
-        return mse
-    '''
-
     def logistic_loss(self, h, y):
         m = len(y)
         epsilon = 1e-15  # Small value to avoid division by zero in log
